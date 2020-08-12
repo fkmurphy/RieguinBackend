@@ -10,9 +10,14 @@ services:
     web:
       container_name: "reguinback"
       build: django/.
-      command: python manage.py runserver 0.0.0.0:8000
+      #command:  python manage.py runserver 0.0.0.0:8000
       volumes:
         - ${PWD}/app:/app
+        - /sys/class/gpio:/sys/class/gpio
+      devices:
+        - /dev/gpiomem:/dev/gpiomem
+        - /dev/mem:/dev/mem
+      privileged: true
       ports:
         - "8000:8000"
       depends_on:
