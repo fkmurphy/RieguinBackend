@@ -1,0 +1,19 @@
+version: '3'
+services:
+    redis:
+        image: redis:6
+        container_name: "redis"
+        volumes:
+          - ./db_redis:/data
+        ports:
+            - 27017:27017
+    web:
+      container_name: "reguinback"
+      build: django/.
+      command: python manage.py runserver 0.0.0.0:8000
+      volumes:
+        - ${PWD}/app:/app
+      ports:
+        - "8000:8000"
+      depends_on:
+        - redis
