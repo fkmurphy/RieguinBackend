@@ -11,4 +11,4 @@ def index(request):
     if humidity is not None and temperature is not None:
         result ="temp={0:0.1f}*C Humidity={1:0.1f}%".format(temperature,humidity)
 
-    return HttpResponse("Hello, world. You're at the polls aindex."+result)
+    return HttpResponse("Ailin te amo mucho <br>."+result)
