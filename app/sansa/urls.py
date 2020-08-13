@@ -17,9 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from humedad import views
-
+from relee import views as rviews
+from sansa import views as firstviews
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-
+    path('hum/', views.index, name='index'),
+    path('luz/', rviews.index, name='index'),
+    path('luz/up/<int:pin>/', rviews.up, name="up"),
+    path('luz/down/<int:pin>/', rviews.down, name="down"),
+    path('luz/status/<int:pin>/', rviews.status, name="status"),
+    path('date/', firstviews.date_time),
 ]
