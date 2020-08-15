@@ -1,6 +1,8 @@
 from django.shortcuts import render
+
 from django.http import HttpResponse
 import time
+
 # Create your views here.
 RELEEPINS=[2,3]
 PATH="/sys/class/gpio/"
