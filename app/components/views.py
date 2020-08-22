@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 import time
+from os import path
 
 # Create your views here.
 RELEEPINS=[2,3]
@@ -11,10 +12,24 @@ def index(requests):
     time.sleep(2)
     return HttpResponse("down up or status")
 
-def start(pin):
+def preparePins(requests):
+    f = open(PATH+"export",'w')
+    message=""
+    for i in RELEEPINS:
+        if (not path.exists(PATH+"gpio"+str(i)+"/")):
+            message+="Activate pin: "+str(i)+"<br>"
+            f.write(str(i)) 
+        else:
+            message+="Pin exist: "+str(i)+"<br>"
+    f.close()
+    
+    return HttpResponse(message)
+
+def start(requests,pin):
     f = open(PATH+"gpio"+str(pin)+"/direction",'w')
     f.write("out")
     f.close()
+    return HttpResponse("Listo!")
 
 def down(requests,pin):
     f = open(PATH+"gpio"+str(pin)+"/value",'w')
@@ -30,8 +45,8 @@ def status(requests,pin):
     f = open(PATH+"gpio"+str(pin)+"/value",'r')
     value = f.read()
     f.close()
-    msg="<p>No está encendido</p>"
+    msg="<p>Está encendido</p>"
     if(0 == int(value)):
-        msg="<p>Está encendido</p>"
+        msg="<p>No está encendido</p>"
     return HttpResponse(msg)
 

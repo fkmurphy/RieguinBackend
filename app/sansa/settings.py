@@ -25,7 +25,7 @@ SECRET_KEY = '6*eq3k3g_grv9yay!jkxica5gsnp5srsikcy*jl71qv((iepqo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.12','reguinback']
+ALLOWED_HOSTS = ['192.168.1.12','reguinback','web']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'telegrambot.apps.TelegrambotConfig',
 ]
 
 MIDDLEWARE = [

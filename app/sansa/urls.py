@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('hum/', views.indexHum, name='index'),
     path('luz/', rviews.index, name='index'),
+    path('luz/prepare/',rviews.preparePins),
+    path('luz/start/<int:pin>/',rviews.start,name='start'),
     path('luz/up/<int:pin>/', rviews.up, name="up"),
     path('luz/down/<int:pin>/', rviews.down, name="down"),
     path('luz/status/<int:pin>/', rviews.status, name="status"),

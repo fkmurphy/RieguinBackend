@@ -10,6 +10,7 @@ services:
     web:
       container_name: "reguinback"
       build: django/.
+      restart: always
       #command:  python manage.py runserver 0.0.0.0:8000
       volumes:
         - ${PWD}/app:/app
@@ -22,3 +23,12 @@ services:
         - "8000:8000"
       depends_on:
         - redis
+    telebot:
+      build:
+        context: ./telebot
+      container_name: telebot
+      volumes: 
+        - ./bot:/bot/app
+      env_file:
+        - .env
+
