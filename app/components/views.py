@@ -5,7 +5,7 @@ import time
 from os import path
 
 # Create your views here.
-RELEEPINS=[2,3]
+RELEEPINS=[2,3,17,27]
 PATH="/sys/class/gpio/"
 def index(requests):
     #preparar start(2) 
@@ -13,16 +13,15 @@ def index(requests):
     return HttpResponse("down up or status")
 
 def preparePins(requests):
-    f = open(PATH+"export",'w')
     message=""
     for i in RELEEPINS:
         if (not path.exists(PATH+"gpio"+str(i)+"/")):
+            f = open(PATH+"export",'w')
             message+="Activate pin: "+str(i)+"<br>"
             f.write(str(i)) 
+            f.close()
         else:
             message+="Pin exist: "+str(i)+"<br>"
-    f.close()
-    
     return HttpResponse(message)
 
 def start(requests,pin):

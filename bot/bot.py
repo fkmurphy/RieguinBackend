@@ -46,10 +46,49 @@ def botactions(bot):
     @bot.message_handler(commands=['i'])
     def start(message):
         markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-        markup.add('lightUp','lightDown','Hum','lightStatus','fanStatus','fanStop','fanUp')
-        msg = bot.reply_to(message,'select option',reply_markup=markup)
+        markup.add('lightUp','lightDown','Hum','lightStatus','fanStatus','fanDown','fanUp')
+        msg = bot.send_message(message.chat.id,'select option',reply_markup=markup)
         bot.register_next_step_handler(message,process)
-
+    def selectDownFan(message):
+        markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+        markup.add('salida','entrada','interno')
+        msg = bot.reply_to(message,'select option',reply_markup=markup)
+        bot.register_next_step_handler(message,downFan)
+    def downFan(message):
+        cid = message.chat.id
+        if(message.text == u'salida'):
+            idFan=3
+        elif(message.text == u'entrada'):
+            idFan=27
+        elif(message.text == u'interno'):
+            idFan=17
+        r = requests.get(url=URL+"luz/up/"+str(idFan)+"/")
+        data = ""
+        if (r.status_code == 200):
+            data = r.text
+        bot.reply_to(message,data)
+        #bot.register_next_step_handler(message,start)
+        start(message)
+    def selectUpFan(message):
+        markup = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+        markup.add('salida','entrada','interno')
+        msg = bot.reply_to(message,'select option',reply_markup=markup)
+        bot.register_next_step_handler(message,upFan)
+    def upFan(message):
+        cid = message.chat.id
+        if(message.text == u'salida'):
+            idFan=3
+        elif(message.text == u'entrada'):
+            idFan=27
+        elif(message.text == u'interno'):
+            idFan=17
+        r = requests.get(url=URL+"luz/down/"+str(idFan)+"/")
+        data = ""
+        if (r.status_code == 200):
+            data = r.text
+        bot.reply_to(message,data)
+        #bot.register_next_step_handler(message,start)
+        start(message)
     @bot.message_handler(func=lambda message: True, content_types=['text'])
     def process(message):
         cid=message.chat.id
@@ -74,18 +113,10 @@ def botactions(bot):
             if (r.status_code == 200):
                 data = r.text
             bot.send_message(cid,data)
-        elif (reply == 'fanStop'):
-            r = requests.get(url=URL+"luz/up/3/")
-            data = ""
-            if (r.status_code == 200):
-                data = r.text
-            bot.send_message(cid,data)
+        elif (reply == 'fanDown'):
+            selectDownFan(message)
         elif (reply == 'fanUp'):
-            r = requests.get(url=URL+"luz/down/3/")
-            data = ""
-            if (r.status_code == 200):
-                data = r.text
-            bot.send_message(cid,data)
+            selectUpFan(message)
         elif (reply == 'lightStatus'):
             r = requests.get(url=URL+"luz/status/2/")
             data = ""

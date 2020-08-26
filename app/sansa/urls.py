@@ -14,15 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 
 from sensors import views
 from components import views as rviews
 from sansa import views as firstviews
+from users import views as uviews
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hum/', views.indexHum, name='index'),
+    path('temp/',views.viewTemp),
     path('luz/', rviews.index, name='index'),
     path('luz/prepare/',rviews.preparePins),
     path('luz/start/<int:pin>/',rviews.start,name='start'),
@@ -30,4 +32,8 @@ urlpatterns = [
     path('luz/down/<int:pin>/', rviews.down, name="down"),
     path('luz/status/<int:pin>/', rviews.status, name="status"),
     path('date/', firstviews.date_time),
+    path(r'^api-auth/', include('rest_framework.urls')),
+    #api
+    path('temp/algo/', views.unPost),
+    path('user',uviews.ver),
 ]
