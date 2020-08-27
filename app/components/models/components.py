@@ -2,6 +2,9 @@ from django.db import models
 from gpios.models import Gpio
 # Create your models here.
 
+from components.models.sensor import *
+from components.models.controller import *
+
 class Component(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField()
@@ -15,6 +18,3 @@ class Component(models.Model):
     
     class Meta:
         abstract = True
-
-from components.models.sensor import *
-from components.models.controller import *
