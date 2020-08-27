@@ -1,0 +1,23 @@
+[
+    {
+        "model": "gpio",
+        "fields":{
+            "enable": false,
+            "pin": 2
+        }
+    },
+    {
+        "model": "gpio",
+        "fields":{
+            "enable": false,
+            "pin": 3
+        }
+    },
+    {
+        "model": "gpio",
+        "fields":{
+            "enable": false,
+            "pin": 4
+        }
+    }
+]
