@@ -20,7 +20,7 @@ from sensors import views
 from components import views as rviews
 from sansa import views as firstviews
 from users import views as uviews
-
+from thsensors import views as dhtview
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hum/', views.indexHum, name='index'),
@@ -36,4 +36,5 @@ urlpatterns = [
     #api
     path('temp/algo/', views.unPost),
     path('user',uviews.ver),
+    path('sensor/<slug:slug>/',dhtview.view)
 ]
