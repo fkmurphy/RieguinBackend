@@ -2,8 +2,8 @@ from django.db import models
 from gpios.models import Gpio
 # Create your models here.
 
-from components.models.sensor import *
-from components.models.controller import *
+from components.models.sensors import *
+from components.models.controllers import *
 
 class Component(models.Model):
     name = models.CharField(max_length=200)
