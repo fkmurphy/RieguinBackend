@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from gpio.models import Gpio
+from gpios.models import Gpio
 
 #admin.site.register(Profile)
 @admin.register(Gpio)
