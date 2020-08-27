@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'components',
     'users',
     'gpios',
+    'thsensors',
 ]
 
 MIDDLEWARE = [

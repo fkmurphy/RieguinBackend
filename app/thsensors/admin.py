@@ -1,10 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
-from THSensor.models import THSensor
+from thsensors.models import THSensor
 
 #admin.site.register(Profile)
-@admin.register(Controller)
+@admin.register(THSensor)
 class THSensorAdmin(admin.ModelAdmin):
 
     list_display=('temp','hum')

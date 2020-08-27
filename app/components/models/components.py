@@ -6,7 +6,7 @@ class Component(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
     direction = models.CharField(max_length=12)
-    slug_name = models.SlugField(unique=True, max_length=40)
+    slug_name = models.SlugField(unique=True, max_length=40,null=True)
     gpio = models.OneToOneField(
         Gpio,
         on_delete=models.CASCADE
