@@ -1,9 +1,20 @@
 from django.db import models
-
+from gpios.models import Gpio
 # Create your models here.
 
 class Component(models.Model):
-    name = models.TextField(max_length=200,unique=True)
-    pin_number = models.PositiveSmallIntegerField()
-    created_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    name = models.CharField(max_length=200)
+    description = models.CharField()
+    direction = models.CharField(max_length=12)
+    gpio = models.OneToOneField(
+        Gpio,
+        on_delete=models.CASCADE
+    )
+    created_at=models.DateTimeField(auto_now_add=True)
+    updated_at=models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        abstract = True
+
+from components.models.sensor import *
+from components.models.controller import *
