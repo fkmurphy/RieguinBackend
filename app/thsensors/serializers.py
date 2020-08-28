@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
 class THSensorSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=200)
-    pin = serializers.PositiveSmallIntegerField()
+    temp = serializers.FloatField()
+    hum = serializers.FloatField()
     
     #name = serializers.CharField(required=True,max_length=255)
     """
